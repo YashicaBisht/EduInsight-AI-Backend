@@ -1,0 +1,39 @@
+databases:
+  - name: eduinsight-postgres
+    databaseName: eduinsight
+    user: eduinsight_user
+    plan: free
+
+services:
+  - type: web
+    name: eduinsight-ai-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: eduinsight-postgres
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: BKT_P_INIT
+        value: "0.20"
+      - key: BKT_P_TRANSIT
+        value: "0.15"
+      - key: BKT_P_SLIP
+        value: "0.10"
+      - key: BKT_P_GUESS
+        value: "0.25"

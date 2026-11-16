@@ -1,0 +1,37 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment Variables & Secrets
+.env
+.env.production
+*.env
+
+# Local Database files
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+*.db
+*.sqlite3
+
+# Models & Weights
+models/*.pkl
+wheels/
+*.whl
+
+# Testing & Logs
+test_*.py.log
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
